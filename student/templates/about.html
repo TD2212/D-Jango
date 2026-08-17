@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<div class="page-card">
+
+    <h1 class="text-primary">About Us</h1>
+
+    <hr>
+
+    <p class="lead">
+        Welcome to our Student Management System.
+    </p>
+
+    <p>
+        This website is developed using Django and Bootstrap.
+        It allows us to manage students, courses and examination results.
+    </p>
+
+    <div class="row mt-4">
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h1>👨‍🎓</h1>
+                    <h5>Students</h5>
+                    <p>Manage student information.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h1>📚</h1>
+                    <h5>Courses</h5>
+                    <p>Manage available courses.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center shadow-sm">
+                <div class="card-body">
+                    <h1>📊</h1>
+                    <h5>Results</h5>
+                    <p>Check student examination results.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

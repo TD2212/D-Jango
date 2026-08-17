@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Results{% endblock %}
+
+{% block content %}
+
+<div class="page-card">
+
+    <h1 class="text-primary mb-4">
+        Student Results
+    </h1>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Marks</th>
+                    <th>Percentage</th>
+                    <th>Result</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>Rahul Patel</td>
+                    <td>BCA</td>
+                    <td>450 / 500</td>
+                    <td>90%</td>
+                    <td>
+                        <span class="badge bg-success">
+                            PASS
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Priya Shah</td>
+                    <td>BSc IT</td>
+                    <td>410 / 500</td>
+                    <td>82%</td>
+                    <td>
+                        <span class="badge bg-success">
+                            PASS
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Amit Patel</td>
+                    <td>MSc IT</td>
+                    <td>230 / 500</td>
+                    <td>46%</td>
+                    <td>
+                        <span class="badge bg-danger">
+                            FAIL
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

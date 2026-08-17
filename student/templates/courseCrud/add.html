@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Add Course{% endblock %}
+
+{% block content %}
+
+<div class="page-card">
+
+    <div class="mb-4">
+        <h1 class="text-primary">Add Course</h1>
+        <p class="text-muted">Enter course information below.</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="row">
+
+            <!-- Course Name -->
+            <div class="col-md-6 mb-3">
+                <label for="courseName" class="form-label fw-bold">
+                    Course Name
+                </label>
+
+                <input
+                    type="text"
+                    id="courseName"
+                    name="Course_name"
+                    class="form-control"
+                    placeholder="Enter course name"
+                    title="Enter the course name"
+                    required
+                >
+            </div>
+
+            <!-- Course Code -->
+            <div class="col-md-6 mb-3">
+                <label for="courseCode" class="form-label fw-bold">
+                    Course Code
+                </label>
+
+                <input
+                    type="text"
+                    id="courseCode"
+                    name="Course_code"
+                    class="form-control"
+                    placeholder="Enter course code"
+                    title="Enter the course code"
+                    required
+                >
+            </div>
+
+            <!-- Start Date -->
+            <div class="col-md-6 mb-3">
+                <label for="startDate" class="form-label fw-bold">
+                    Start Date
+                </label>
+
+                <input
+                    type="date"
+                    id="startDate"
+                    name="start_date"
+                    class="form-control"
+                    title="Select course start date"
+                    required
+                >
+            </div>
+
+            <!-- End Date -->
+            <div class="col-md-6 mb-3">
+                <label for="endDate" class="form-label fw-bold">
+                    End Date
+                </label>
+
+                <input
+                    type="date"
+                    id="endDate"
+                    name="end_date"
+                    class="form-control"
+                    title="Select course end date"
+                    required
+                >
+            </div>
+
+            <!-- Faculty -->
+            <div class="col-md-6 mb-3">
+                <label for="facultyName" class="form-label fw-bold">
+                    Faculty Name
+                </label>
+
+                <input
+                    type="text"
+                    id="facultyName"
+                    name="faculty_name"
+                    class="form-control"
+                    placeholder="Enter faculty name"
+                    title="Enter faculty name"
+                    required
+                >
+            </div>
+
+            <!-- Active -->
+            <div class="col-md-6 mb-3">
+
+                <label for="isActive" class="form-label fw-bold">
+                    Course Status
+                </label>
+
+                <select
+                    id="isActive"
+                    name="is_active"
+                    class="form-select"
+                    title="Select course status"
+                    required
+                >
+                    <option value="True">Active</option>
+                    <option value="False">Inactive</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <div class="mt-4">
+
+            <button
+                type="submit"
+                class="btn btn-success"
+                title="Save course"
+            >
+                Save Course
+            </button>
+
+            <a
+                href="{% url 'course_list' %}"
+                class="btn btn-secondary"
+                title="Return to course list"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

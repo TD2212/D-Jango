@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Django Admin | Products</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .product-card-shadow { box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.03); }
+        .product-card-hover:hover { transform: translateY(-4px); box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 8px 10px -6px rgba(0, 0, 0, 0.05); }
+        .accent-bar { width: 4px; height: 100%; position: absolute; left: 0; top: 0; background-color: #0058be; }
+        .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#c0c7d0",
+                        "on-secondary": "#ffffff",
+                        "outline": "#76777d",
+                        "surface-dim": "#d8dadc",
+                        "surface-tint": "#565e74",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#151c23",
+                        "surface-container-high": "#e6e8ea",
+                        "outline-variant": "#c6c6cd",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-fixed": "#151c23",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "background": "#f7f9fb",
+                        "on-tertiary-container": "#7d858d",
+                        "tertiary-fixed": "#dce3ec",
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-container": "#fefcff",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#40484f",
+                        "on-primary-container": "#7c839b",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-background": "#191c1e",
+                        "primary-container": "#131b2e",
+                        "surface-bright": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "surface": "#f7f9fb",
+                        "primary-fixed-dim": "#bec6e0",
+                        "secondary-container": "#2170e4",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-fixed": "#dae2fd",
+                        "primary": "#000000",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "error": "#ba1a1a",
+                        "on-surface": "#191c1e",
+                        "surface-container": "#eceef0",
+                        "tertiary": "#000000",
+                        "inverse-primary": "#bec6e0",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary": "#0058be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "1rem",
+                        "stack-lg": "2rem",
+                        "stack-sm": "0.5rem",
+                        "container-max": "1440px",
+                        "margin-mobile": "1rem",
+                        "margin-desktop": "2rem",
+                        "gutter": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"], "body-md": ["Inter"], "label-sm": ["Inter"], "headline-xl": ["Inter"], "headline-sm": ["Inter"], "label-md": ["Inter"], "body-lg": ["Inter"], "headline-md": ["Inter"], "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar (Shared Component SideNavBar Logic) -->
+<aside class="fixed left-0 top-0 h-full w-70 hidden lg:flex flex-col bg-primary-container dark:bg-primary-container shadow-lg z-50">
+<div class="px-6 py-8">
+<h1 class="font-headline-sm text-headline-sm font-black text-on-primary-container">Admin Panel</h1>
+<p class="font-label-sm text-label-sm text-on-primary-container opacity-60">Enterprise Suite</p>
+</div>
+<nav class="flex flex-col gap-stack-sm py-gutter">
+<!-- Dashboard -->
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Users -->
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Users</span>
+</a>
+<!-- Products (Active) -->
+<div class="relative bg-secondary-container text-on-secondary-container rounded-xl mx-2 px-4 py-3 flex items-center gap-3 active:scale-98">
+<div class="accent-bar rounded-l-xl"></div>
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Products</span>
+</div>
+<!-- Orders -->
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<!-- Reports -->
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<div class="mt-auto flex flex-col gap-stack-sm mb-4">
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+<a class="text-on-primary-container opacity-70 mx-2 px-4 py-3 flex items-center gap-3 hover:bg-primary-fixed-variant hover:opacity-100 transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:ml-72 min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component TopNavBar Logic) -->
+<header class="bg-surface dark:bg-surface-container font-body-md text-body-md docked full-width top-0 sticky z-40 border-b border-surface-container dark:border-outline-variant shadow-sm flex justify-between items-center w-full px-gutter h-16">
+<div class="flex items-center gap-4">
+<button class="lg:hidden p-2 text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Products</span>
+</div>
+<div class="flex-1 max-w-md mx-8 hidden md:block">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-sm font-body-sm focus:ring-2 focus:ring-secondary/20 transition-all" placeholder="Search products, SKUs, categories..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-low p-2 rounded-full transition-all">notifications</button>
+<div class="flex items-center gap-3 ml-2 pl-4 border-l border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</div>
+<span class="hidden sm:block font-label-md text-label-md font-semibold">Admin User</span>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-gutter max-w-container-max w-full mx-auto">
+<!-- Hero / Controls Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Inventory Overview</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manage your product catalog, stock levels, and pricing.</p>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-surface border border-outline-variant rounded-xl font-label-md text-label-md hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                        Filters
+                    </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:opacity-90 shadow-lg active:scale-95 transition-all" onclick="document.getElementById('addModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add Product
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-8">
+<div class="bg-surface rounded-xl p-6 product-card-shadow border border-surface-container">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Products</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-headline-lg text-headline-lg">1,284</span>
+<span class="bg-success-container text-success px-2 py-1 rounded text-xs font-bold">+12%</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-6 product-card-shadow border border-surface-container">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Low Stock</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-headline-lg text-headline-lg text-error">42</span>
+<span class="bg-error-container text-error px-2 py-1 rounded text-xs font-bold">Action Needed</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-6 product-card-shadow border border-surface-container">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Categories</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-headline-lg text-headline-lg">18</span>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-xs font-bold">Healthy</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-6 product-card-shadow border border-surface-container">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Inventory Value</p>
+<div class="flex items-center justify-between mt-2">
+<span class="font-headline-lg text-headline-lg">$84.2k</span>
+<span class="text-outline text-xs">Updated 2m ago</span>
+</div>
+</div>
+</div>
+<!-- Product Bento Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group bg-surface rounded-xl overflow-hidden product-card-shadow border border-surface-container product-card-hover transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A high-quality studio shot of a sleek, minimalist smartphone with a ceramic back and chrome edges. The lighting is soft and directional, casting subtle shadows that emphasize its slim profile. The background is a clean, neutral gray, echoing a corporate SaaS aesthetic with deep contrast and premium finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl14QeQKKMqtEnwgZisHsYTP8qmSxQBBj3GYxAncmREFm7kxtosM2sw90vxFhxiLpR7oVxvbORtgzPhbxTc_oSwvPWh7LpfgonWvTvpjkzB-0vJjB0K_JbjvL4QU77Wjg2E-bnNPTHU-IiY1uSKiREfQhuPEYkkbR1szoOpnkA0jkmzVl544H5ycH7PQEdeTVZzSSIWPp44-JNcjUtP-OVY62St26Z8NpqMK83ZTtgQVYJgyg881CXknX__acvbP02Ub1c-nB1kLQ"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-success text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase">In Stock</span>
+<span class="bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-md text-[10px] font-medium">Electronics</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Quantum Phone X</h3>
+<span class="font-bold text-secondary">$999.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-1">Next-gen processing for professionals.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-4">
+<span class="font-label-sm text-label-sm text-outline">SKU: QX-2024-001</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors p-1">edit</button>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors p-1">delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-surface rounded-xl overflow-hidden product-card-shadow border border-surface-container product-card-hover transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up professional photography of an ergonomic workstation chair with woven mesh fabric and brushed aluminum supports. The scene is lit with cool-toned studio lights, creating a professional and calm workspace atmosphere. The color palette features deep navy and silver accents against a pristine white studio backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7Uf5etvbx61lkKy5SdfzX8jS3GIXjgVuTSlMqz7hIUUEIQ0bUF44IR89DB5aZOMVZI4l0dVFoSeSuastbEf_bEMS9BD6mzBL_uORVFulKnauaZLbjSz-Z5dF7-GUEHAcXifu2q6ggRsNFUNNOUg_Wks-ejWxQNRKiY6OMeGjGirlX4b--JHb7lU2LJJXPeNAs7oPeXh_qwQG_9mItL9LJ44J3U9we7ACJj9e2evO1-bKp8kLOyqH4XbZP1GPmjF0juMavY-QcF34"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-error text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase">Low Stock</span>
+<span class="bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-md text-[10px] font-medium">Furniture</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Ergo-Task Chair</h3>
+<span class="font-bold text-secondary">$450.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-1">Lumbar support for 12-hour workdays.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-4">
+<span class="font-label-sm text-label-sm text-outline">SKU: FUR-ERGO-99</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors p-1">edit</button>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors p-1">delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-surface rounded-xl overflow-hidden product-card-shadow border border-surface-container product-card-hover transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="An elegant, modern espresso machine with a matte black finish and copper dials. It sits on a clean marble countertop under warm, ambient spotlighting that highlights its metallic textures. The image conveys high-end corporate kitchen aesthetics, balancing industrial precision with luxurious design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOnTtlS3LAGto6Aq0cjXCysv_FnuZDwDCatezgueSkMzHbYh6UfmniffusD9AO0Zhgjx_XB0h9w_1TVr3SgFh5AKJ_P5YQgfeQZv2StDqcO8yXrg9UVR1Jp-woelNCvd5hTf2YJWvAV47o2D3ACw66bf0mBI_d_0FAwS7-_oLylDvkmvtd46k461OARAverAoKD_xoTNdXZfhk7rAu88LA6KCpfxCAF9uNTWotqL5wjH1KyIWJzh8NuV8eOP0mKLfDXzoxOEx2fUU"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-outline text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase">Out of Stock</span>
+<span class="bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-md text-[10px] font-medium">Appliances</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">ProBrew Elite</h3>
+<span class="font-bold text-secondary">$1,299.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-1">Barista-grade coffee for the office.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-4">
+<span class="font-label-sm text-label-sm text-outline">SKU: APP-BREW-01</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors p-1">edit</button>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors p-1">delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-surface rounded-xl overflow-hidden product-card-shadow border border-surface-container product-card-hover transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A macro photograph of a high-performance mechanical keyboard with RGB backlighting illuminating semi-transparent keycaps. The setting is a dark, focused gaming or developer desk. The lights are a soft cyan and magenta, creating a vibrant yet professional tech-heavy vibe with sharp focus on the tactile textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiXvDmB8h-LRSP8fZfvmCoc34RmMRslTgLqR23mMrBCy22uFhSiFG2oW6cpExFQUNBiwazc907Geu5m9fGpTuar7llBP6fOF5ahO3SsnXEV4Jsz4gGRnQS7aknVMWRb8NW2OfbEJxI2ZCtpSTCNvsXmBharxFQnbuevEDyG-9ecNrxkf8Jd5fAGEkWeVj1GPnFBro8obF-NyXd2TXPtVvtCVpSS7lsKccGXnoyKQ5fog37kDGrD004DNm5W4b3j8DrMZsYaWbjPWo"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-success text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase">In Stock</span>
+<span class="bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-md text-[10px] font-medium">Accessories</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">TypeMaster Pro</h3>
+<span class="font-bold text-secondary">$189.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-1">Mechanical tactile bliss for coders.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-4">
+<span class="font-label-sm text-label-sm text-outline">SKU: ACC-KBD-05</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors p-1">edit</button>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors p-1">delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group bg-surface rounded-xl overflow-hidden product-card-shadow border border-surface-container product-card-hover transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A designer leather messenger bag in a rich walnut brown, displayed against a dark wood table. The lighting is moody and warm, highlighting the grain of the leather and the brass hardware. This product photo emphasizes premium craftsmanship and timeless corporate style, fitting for an executive suite environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmyipVzmLG0ej6GBiQSr4YaiP0GewrJw_9bOyHSsQfr9m05hURhDneqHmLdfWQir1a3XUyQeWOSSRZRrglXwqAMwqojJXIyK67PJJ5G1BS8LHsBIAle_ODz-oA3JL_2pKarafxUDZNnQrAYQpSacqT1lUN5eLsgJJligREKqOZ5l4QRDmaJxJkHlb-_b5b5rKUNIwuWa_UswYfpBh4NhBznD97Crqad8x8dByTSMB60bvcQ3OUcAvTnAIxl3Tg-hQ3BRLp_rnCWv4"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-success text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase">In Stock</span>
+<span class="bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-md text-[10px] font-medium">Fashion</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Executive Satchel</h3>
+<span class="font-bold text-secondary">$320.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-1">Genuine leather for the boardroom.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-4">
+<span class="font-label-sm text-label-sm text-outline">SKU: FAS-BAG-12</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors p-1">edit</button>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors p-1">delete</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group bg-surface rounded-xl overflow-hidden product-card-shadow border border-surface-container product-card-hover transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Professional noise-canceling headphones in matte white with soft gray ear cushions. They are isolated on a minimalist white background with clean, sharp lighting that creates high-key professional product imagery. The look is airy, modern, and high-tech, perfect for a corporate productivity focused UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUUottuoTC4vNkFt7cvCPGNQkmrPhyDaAAXXiCtYaZU8YheEAObyqYa5QlZmeIUqi4q2AH30qIOndtbl2lHp0-JfiK9ntJkofQdSPOT3z1J51NnFYHmESC2kzEMPbJCsZvRtCk9a4PCkH1ESOFUjw8OifVTBgCN9tMbMs5jKArdn_S4RDYEa-FvlyADLMvcWMaEyaFqHjygLvnBlQ7d_bkT7EqE6xW8XkSwfHhJLZgBMHacYCOXv2WChWbJh7w9920_DV-3zkBVTs"/>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-success text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase">In Stock</span>
+<span class="bg-black/50 backdrop-blur-md text-white px-2 py-1 rounded-md text-[10px] font-medium">Electronics</span>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Sonic-Silence ANC</h3>
+<span class="font-bold text-secondary">$299.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-1">Pure focus in any environment.</p>
+<div class="flex items-center justify-between border-t border-surface-container pt-4">
+<span class="font-label-sm text-label-sm text-outline">SKU: QX-2024-042</span>
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors p-1">edit</button>
+<button class="material-symbols-outlined text-outline hover:text-error transition-colors p-1">delete</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between mt-12 py-6 border-t border-surface-container">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 6 of 1,284 entries</span>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-all">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component Footer Logic) -->
+<footer class="bg-surface dark:bg-surface-container-low w-full py-6 mt-auto border-t border-surface-container dark:border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto font-label-sm text-label-sm text-on-surface-variant dark:text-outline">
+<p>© 2024 Django Admin Dashboard</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Add Product Modal -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" id="addModal">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="document.getElementById('addModal').classList.add('hidden')"></div>
+<div class="relative bg-surface w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+<div class="px-8 py-6 border-b border-surface-container flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md">Add New Product</h2>
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors" onclick="document.getElementById('addModal').classList.add('hidden')">close</button>
+</div>
+<div class="p-8 space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1.5">Product Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none" placeholder="e.g. Wireless Mouse Pro" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1.5">Price ($)</label>
+<input class="w-full bg-surface border border-outline-variant rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none" placeholder="0.00" type="number"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1.5">Category</label>
+<select class="w-full bg-surface border border-outline-variant rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none appearance-none">
+<option>Electronics</option>
+<option>Furniture</option>
+<option>Office</option>
+</select>
+</div>
+<div class="col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1.5">Description</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-secondary/20 focus:border-secondary transition-all outline-none min-h-[100px]" placeholder="Product specifications and features..."></textarea>
+</div>
+</div>
+</div>
+<div class="px-8 py-6 bg-surface-container-low flex justify-end gap-3">
+<button class="px-6 py-2.5 rounded-xl font-label-md text-label-md border border-outline-variant hover:bg-surface transition-all" onclick="document.getElementById('addModal').classList.add('hidden')">Cancel</button>
+<button class="px-8 py-2.5 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all">Create Product</button>
+</div>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        // Simple search feedback
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput?.addEventListener('input', (e) => {
+            console.log('Searching for:', e.target.value);
+        });
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('addModal').classList.add('hidden');
+            }
+        });
+    </script>
+</body></html>

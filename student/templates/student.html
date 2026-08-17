@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+
+<div class="page-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1 class="text-primary">
+            Student List
+        </h1>
+
+        <button class="btn btn-success">
+            + Add Student
+        </button>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>Rahul Patel</td>
+                    <td>rahul@gmail.com</td>
+                    <td>BCA</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">
+                            Edit
+                        </button>
+
+                        <button class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Priya Shah</td>
+                    <td>priya@gmail.com</td>
+                    <td>BSc IT</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm">
+                            Edit
+                        </button>
+
+                        <button class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

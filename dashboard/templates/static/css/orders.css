@@ -1,0 +1,6 @@
+/* orders.css */
+.order-status { font-weight: 500; }
+.status-delivered { color: #059669; background: #ecfdf5; }
+.status-pending { color: #d97706; background: #fffbeb; }
+.status-shipped { color: #2563eb; background: #eff6ff; }
+.status-cancelled { color: #dc2626; background: #fef2f2; }

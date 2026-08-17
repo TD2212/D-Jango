@@ -1,0 +1,15 @@
+/* Login specific styles */
+.login-card {
+    max-width: 450px;
+    width: 100%;
+}
+
+.login-bg {
+    background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    border-color: #2563eb;
+}

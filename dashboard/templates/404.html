@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Django Admin | 404 Not Found</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-tint": "#565e74",
+                    "on-error": "#ffffff",
+                    "background": "#f7f9fb",
+                    "outline": "#76777d",
+                    "primary": "#000000",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-secondary-fixed": "#001a42",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-background": "#191c1e",
+                    "surface": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-surface": "#191c1e",
+                    "primary-container": "#131b2e",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#bec6e0",
+                    "on-primary-fixed": "#131b2e",
+                    "primary-fixed": "#dae2fd",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "tertiary-fixed-dim": "#c0c7d0",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "on-error-container": "#93000a",
+                    "secondary": "#0058be",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-container": "#7c839b",
+                    "tertiary": "#000000",
+                    "tertiary-container": "#151c23",
+                    "secondary-container": "#2170e4",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#dce3ec",
+                    "on-surface-variant": "#45464d",
+                    "on-tertiary-container": "#7d858d",
+                    "surface-variant": "#e0e3e5",
+                    "outline-variant": "#c6c6cd",
+                    "on-tertiary-fixed-variant": "#40484f",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-tertiary-fixed": "#151c23",
+                    "surface-bright": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary-container": "#fefcff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "1.5rem",
+                    "stack-sm": "0.5rem",
+                    "margin-desktop": "2rem",
+                    "stack-lg": "2rem",
+                    "margin-mobile": "1rem",
+                    "stack-md": "1rem",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F1F5F9;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .transition-standard {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Elevation & Shadow tokens from Style Guidance */
+        .level-1-shadow {
+            box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.03);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .glare-effect {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar: Execution of Shared Components JSON -->
+<header class="bg-surface dark:bg-surface-container border-b border-surface-container dark:border-outline-variant shadow-sm docked full-width top-0 sticky z-40 flex justify-between items-center w-full px-gutter h-16">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Django Admin</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-4 py-12">
+<div class="max-w-3xl w-full text-center space-y-stack-lg">
+<!-- Error Illustration Canvas -->
+<div class="relative flex justify-center">
+<div class="relative w-full max-w-lg aspect-video rounded-xl overflow-hidden level-1-shadow bg-surface-container-lowest border border-outline-variant/20 flex items-center justify-center">
+<!-- Dynamic Grid Background -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Atmospheric Glow -->
+<div class="absolute w-64 h-64 bg-secondary/5 blur-3xl rounded-full -top-10 -left-10"></div>
+<div class="absolute w-64 h-64 bg-primary/5 blur-3xl rounded-full -bottom-10 -right-10"></div>
+<!-- Main Image Placeholder -->
+<div class="relative z-10 animate-float p-gutter">
+<img class="max-h-64 md:max-h-80 w-auto drop-shadow-2xl" data-alt="A sophisticated corporate modern 3D digital illustration representing a 404 error for a high-end enterprise SaaS dashboard. The scene features a stylized, minimalist floating server rack with detached, glowing blue data cables drifting in a clean, high-key white studio space. Soft ambient shadows ground the composition while vibrant primary blue and deep charcoal accents create professional contrast. The aesthetic is clean, technological, and calm, utilizing tonal layering and subtle gradients." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL4zTriyROfCZaKs0FpmnEhk2Ri8i73rCNS77ChOWz_YqnnWWL-nPZDtKL1sUwqiTpX3Ccdqe7GbaVKPdcjc5krpTax6cQwKx3Eojao4uD8tvNL4MppEdnRh7y4JUYXWoPYmGM70qynhgMJ99rji5ifxtEzLtm2sSk8gGSBgxcdoQqackoNLWIOsdAA01Kky4167BnXMfMUpkp0nNE9q_R-HKplSSBRIlLc67jnpySfyPec4L7Iqfw5Wi2ItqIT0OFv0eLdPpgDRI"/>
+</div>
+<!-- Decorative UI Elements (Floating Data Nodes) -->
+<div class="absolute top-10 right-10 p-3 bg-surface-container-highest rounded-lg level-1-shadow flex items-center gap-2 border border-outline-variant/30 animate-pulse">
+<span class="material-symbols-outlined text-error text-[20px]">error</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">404: Not Found</span>
+</div>
+</div>
+</div>
+<!-- Error Message Content -->
+<div class="space-y-stack-md">
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">
+                    Lost in the Warehouse?
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">
+                    The page you are looking for doesn't exist or has been moved to a new section in the enterprise suite. Let's get you back to your data.
+                </p>
+</div>
+<!-- CTA Container -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+<a class="group inline-flex items-center gap-3 bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary font-label-md text-label-md px-8 py-4 rounded-lg transition-standard level-1-shadow active:scale-95" href="/dashboard">
+<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    Back to Dashboard
+                </a>
+<button class="inline-flex items-center gap-2 bg-transparent text-secondary hover:bg-secondary-fixed/30 font-label-md text-label-md px-8 py-4 rounded-lg transition-standard" onclick="window.history.back()">
+                    Go Back Previous
+                </button>
+</div>
+<!-- Helpful Quick Links -->
+<div class="pt-12 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/20 hover:border-secondary transition-standard cursor-pointer group">
+<span class="material-symbols-outlined text-secondary mb-2">inventory_2</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Products</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">View all inventory items</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/20 hover:border-secondary transition-standard cursor-pointer group">
+<span class="material-symbols-outlined text-secondary mb-2">shopping_cart</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Orders</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Track recent shipments</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/20 hover:border-secondary transition-standard cursor-pointer group">
+<span class="material-symbols-outlined text-secondary mb-2">help</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Support</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Get technical assistance</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer: Execution of Shared Components JSON -->
+<footer class="bg-surface dark:bg-surface-container-low border-t border-surface-container dark:border-outline-variant w-full py-6 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-primary">Django Admin Dashboard</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant opacity-60">© 2024 Django Admin Dashboard</span>
+</div>
+<nav class="flex gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors" href="#">Help Center</a>
+</nav>
+</div>
+</footer>
+<script>
+        // Micro-interaction for hover states and subtle mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.querySelector('.bg-secondary/5');
+            if (glow) {
+                const x = e.clientX / window.innerWidth * 100;
+                const y = e.clientY / window.innerHeight * 100;
+                glow.style.transform = `translate(${x/5}px, ${y/5}px)`;
+            }
+        });
+
+        // Initialize Material Icons weight
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if (icon.dataset.weight === 'fill') {
+                icon.style.fontVariationSettings = "'FILL' 1";
+            }
+        });
+    </script>
+</body></html>

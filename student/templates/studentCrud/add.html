@@ -1,0 +1,131 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block content %}
+
+<div class="page-card">
+
+    <div class="mb-4">
+        <h1 class="text-primary">Add Student</h1>
+        <p class="text-muted">
+            Enter student information below.
+        </p>
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="row">
+
+            <!-- Student Name -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentName" class="form-label fw-bold">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="studentName"
+                    name="name"
+                    class="form-control"
+                    placeholder="Enter student name"
+                    title="Enter the student's full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentEmail" class="form-label fw-bold">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="studentEmail"
+                    name="email"
+                    class="form-control"
+                    placeholder="Enter email address"
+                    title="Enter the student's email address"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Mobile -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentMobile" class="form-label fw-bold">
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="studentMobile"
+                    name="mobile"
+                    class="form-control"
+                    placeholder="Enter mobile number"
+                    title="Enter the student's mobile number"
+                    required
+                >
+
+            </div>
+
+
+            <!-- City -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentCity" class="form-label fw-bold">
+                    City
+                </label>
+
+                <input
+                    type="text"
+                    id="studentCity"
+                    name="city"
+                    class="form-control"
+                    placeholder="Enter city"
+                    title="Enter the student's city"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="mt-4">
+
+            <button
+                type="submit"
+                class="btn btn-success"
+                title="Save student information"
+            >
+                Save Student
+            </button>
+
+            <a
+                href="{% url 'student_list' %}"
+                class="btn btn-secondary"
+                title="Return to student list"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+```

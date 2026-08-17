@@ -1,0 +1,152 @@
+```html
+{% extends "base.html" %}
+
+{% block title %}Edit Student{% endblock %}
+
+{% block content %}
+
+<div class="page-card">
+
+    <div class="mb-4">
+        <h1 class="text-primary">Edit Student</h1>
+        <p class="text-muted">
+            Update the student's information below.
+        </p>
+    </div>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="row">
+
+            <!-- Student Name -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentName" class="form-label fw-bold">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="studentName"
+                    name="name"
+                    class="form-control"
+                    value="{{ student.name }}"
+                    placeholder="Enter student name"
+                    title="Enter the student's full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentEmail" class="form-label fw-bold">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="studentEmail"
+                    name="email"
+                    class="form-control"
+                    value="{{ student.email }}"
+                    placeholder="Enter email address"
+                    title="Enter the student's email address"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Course -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentCourse" class="form-label fw-bold">
+                    Course
+                </label>
+
+                <select
+                    id="studentCourse"
+                    name="course"
+                    class="form-select"
+                    title="Select the student's course"
+                    required
+                >
+
+                    <option value="">
+                        Select Course
+                    </option>
+
+                    <option value="BCA"
+                        {% if student.course == "BCA" %}selected{% endif %}>
+                        BCA
+                    </option>
+
+                    <option value="BSc IT"
+                        {% if student.course == "BSc IT" %}selected{% endif %}>
+                        BSc IT
+                    </option>
+
+                    <option value="MSc IT"
+                        {% if student.course == "MSc IT" %}selected{% endif %}>
+                        MSc IT
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Mobile Number -->
+            <div class="col-md-6 mb-3">
+
+                <label for="studentMobile" class="form-label fw-bold">
+                    Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="studentMobile"
+                    name="mobile"
+                    class="form-control"
+                    value="{{ student.mobile }}"
+                    placeholder="Enter mobile number"
+                    title="Enter the student's mobile number"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="mt-4">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+                title="Update student information"
+            >
+                Update Student
+            </button>
+
+            <a
+                href="{% url 'student_list' %}"
+                class="btn btn-secondary"
+                title="Cancel editing and return to student list"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+```
