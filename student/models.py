@@ -21,3 +21,13 @@ class Course(models.Model):
 
     def __str__(self):
         return self.Course_name
+
+
+class Department(models.Model):
+    Department_name = models.CharField(max_length=100)
+    Department_code= models.CharField(max_length=20, unique=True)
+    Suparviour_name = models.CharField(max_length=100)
+    Type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.Department_name

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Department List{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-primary mb-4">Department List</h1>
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Department Name</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for department in departments %}
+                    <tr>
+                        <td>{{ department.id }}</td>
+                        <td>{{ department }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            No departments found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

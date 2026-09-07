@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db import IntegrityError
-from .models import Student, Course
+from .models import Student, Course ,Department
 from .form import CourseForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView,DetailView
@@ -173,3 +173,12 @@ class CourseUpdateView(UpdateView):
     form_class=CourseForm
     template_name='courseCrud/add.html'
     success_url=reverse_lazy('courseCrud/list.html')
+
+def department_list(request):
+    departments = Department.objects.all()
+
+    return render(
+        request,
+        'department_list.html',
+        {'departments': departments}
+    )

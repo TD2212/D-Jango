@@ -3,6 +3,16 @@
 {% block title %}Students{% endblock %}
 
 {% block content %}
+<div class="search-box">
+    <form method="get">
+        <input type="text"
+        name="q"
+        value="{{request.GET.q}}"
+        placeholder="Search Course">
+    <button type="submit" class="search-btn">Search</button>
+    <a href="{% url 'student_list' %}" class="search-btn">Reset</a>
+    </form>
+</div>
 
 <div class="page-card">
 
