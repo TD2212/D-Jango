@@ -4,6 +4,10 @@ from .models import Student, Course ,Department
 from .form import CourseForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView,ListView,UpdateView,DeleteView,DetailView
+from django.contrib.auth import *
+from django.contrib.auth.decorators import *
+from django.contrib.auth.mixins import *
+
 
 
 # =========================
@@ -138,10 +142,14 @@ def course_delete(request, id):
 # OTHER PAGES
 # =========================
 
+
+
 def home(request):
-    return render(request, "home.html")
+    username='Dabhi'
+    return render(request, "home.html",{'username':username})
 
 
+@login_required(login_url ='login')
 def about(request):
     return render(request, "about.html")
 
@@ -182,3 +190,25 @@ def department_list(request):
         'department_list.html',
         {'departments': departments}
     )
+
+def login_view(request):
+    if request.method == "POST":
+        username= request.POST['username']
+        password= request.POST['password']
+        user= authenticate(
+            request,
+            username=username,
+            password=password
+        )
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            return render(request, 'login.html',{
+                'error':'Invalid username or Password'
+            })   
+    return render(request,'login.html')
+            
+def logout_view(request):
+    logout(request)
+    return redirect('login')
